@@ -21,17 +21,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Add pjproject library dir to CMAKE_FIND_ROOT_PATH for example: -DCMAKE_FIND_ROOT_PATH:PATH=%{Qt:QT_INSTALL_PREFIX};/home/developer/pj-2_10-android
 # TARGET_ABI=armeabi-v7a APP_PLATFORM=android-16 ./configure-android --prefix /home/developer/pj-2_10-android-16-armeabi-v7a
 
-#if(ANDROID)
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
+if(ANDROID)
+    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
 #    if (ANDROID_ABI STREQUAL "armeabi-v7a")
 #        set(ANDROID_EXTRA_LIBS
 #            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so
 #            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
 #    endif()
-#endif()
+endif()
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick LinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools REQUIRED)
+if(ANDROID)
+    find_package(QT NAMES Qt6 Qt5 COMPONENTS AndroidExtras REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS AndroidExtras REQUIRED)
+endif()
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(PJSIP IMPORTED_TARGET libpjproject REQUIRED)
 
@@ -73,5 +77,9 @@ target_compile_definitions(Qsua
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(Qsua
   PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick PkgConfig::PJSIP)
+
+if(ANDROID)
+    target_link_libraries(Qsua PRIVATE Qt${QT_VERSION_MAJOR}::AndroidExtras)
+endif()
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

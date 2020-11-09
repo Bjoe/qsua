@@ -4,6 +4,16 @@
 #include "calllistmodel.h"
 #include "pjsuacontext.h"
 
+#if defined (Q_OS_ANDROID)
+#include <QtAndroid>
+const QVector<QString> permissions({"android.permission.INTERNET",
+                                    "android.permission.RECORD_AUDIO",
+                                    "android.permission.MODIFY_AUDIO_SETTINGS",
+                                    "android.permission.ACCESS_NETWORK_STATE",
+                                    "android.permission.ACCESS_WIFI_STATE"
+                                    });
+#endif
+
 int main(int argc, char *argv[])
 {
     //qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
@@ -22,6 +32,18 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<qsua::CallListModel>("CallList", 1, 0, "CallListModel");
     qmlRegisterType<qsua::PjSuaContext>("PjSuaCtx", 1, 0, "PjSuaContext");
+
+#if defined (Q_OS_ANDROID)
+    //Request requiered permissions at runtime
+    for(const QString &permission : permissions){
+       auto result = QtAndroid::checkPermission(permission);
+        if(result == QtAndroid::PermissionResult::Denied){
+            auto resultHash = QtAndroid::requestPermissionsSync(QStringList({permission}));
+            if(resultHash[permission] == QtAndroid::PermissionResult::Denied)
+                return 0;
+        }
+    }
+#endif
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
