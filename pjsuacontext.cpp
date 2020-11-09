@@ -66,7 +66,11 @@ void PjSuaContext::onMakeCall(const QString& uri)
     pj::CallOpParam prm(true);
     prm.opt.audioCount = 1;
     prm.opt.videoCount = 0;
-    call->makeCall(uri.toStdString(), prm);
+    try {
+        call->makeCall(uri.toStdString(), prm);
+    }  catch (pj::Error& e) {
+        qWarning() << "Make call failed: " << e.reason.c_str() << " src File: " << e.srcFile.c_str() << " : " << e.srcLine << " (" << e.status << ") " << e.title.c_str();
+    }
 
     model_->addCall(call);
     qDebug() << "Make call" << uri << "started";
