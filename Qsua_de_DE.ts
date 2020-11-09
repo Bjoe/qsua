@@ -28,13 +28,13 @@
 <context>
     <name>Page1Form.ui</name>
     <message>
-        <location filename="Page1Form.ui.qml" line="7"/>
-        <location filename="Page1Form.ui.qml" line="31"/>
+        <location filename="Page1Form.ui.qml" line="8"/>
+        <location filename="Page1Form.ui.qml" line="25"/>
         <source>Account configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="40"/>
+        <location filename="Page1Form.ui.qml" line="33"/>
         <source>The full SIP URL for the account</source>
         <translation type="unfinished"></translation>
     </message>
@@ -44,37 +44,37 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="55"/>
+        <location filename="Page1Form.ui.qml" line="48"/>
         <source>URL to be put in the request URI for the registration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="75"/>
+        <location filename="Page1Form.ui.qml" line="69"/>
         <source>Account credentials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="84"/>
+        <location filename="Page1Form.ui.qml" line="77"/>
         <source>Credential Scheme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="99"/>
+        <location filename="Page1Form.ui.qml" line="92"/>
         <source>Realm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="114"/>
+        <location filename="Page1Form.ui.qml" line="107"/>
         <source>User name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="129"/>
+        <location filename="Page1Form.ui.qml" line="122"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="135"/>
+        <location filename="Page1Form.ui.qml" line="128"/>
         <source>password</source>
         <translation type="unfinished"></translation>
     </message>
