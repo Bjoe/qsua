@@ -52,7 +52,7 @@ void SipCall::onCallState([[maybe_unused]] pj::OnCallStateParam &prm)
     QString stateTxt{ci.stateText.c_str()};
     qDebug() << "*** Call: " <<  ci.remoteUri.c_str() << " [" << stateTxt << "]";
 
-    emit stateChanged(stateTxt);//, ci.state);
+    emit stateChanged(stateTxt, ci.state);
 }
 
 void SipCall::onCallMediaState([[maybe_unused]] pj::OnCallMediaStateParam &prm)

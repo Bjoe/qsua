@@ -27,7 +27,7 @@ public:
     Q_INVOKABLE void hangup();
 
 signals:
-    void stateChanged(QString stateTxt);//, pjsip_inv_state state);
+    void stateChanged(QString stateTxt, int state);
 
     // Call interface
 protected:

@@ -15,12 +15,12 @@ class CallLogEntry : public QObject
 public:
     CallLogEntry(int row, SipCall* call, QObject* parent = nullptr);
 
-    SipCall* call() const;
+    SipCall* call() const; // TODO Refactor to use callId
     QString remoteUri() const;
     QString state() const;
 
 public slots:
-    void onCallStateChanged(QString stateTxt);//, pjsip_inv_state state);
+    void onCallStateChanged(QString stateTxt, int state);
 
 signals:
     void entryChanged(int row, const QVector<int> &roles = QVector<int>());

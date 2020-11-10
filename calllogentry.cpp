@@ -24,13 +24,16 @@ QString CallLogEntry::state() const
     return state_;
 }
 
-void CallLogEntry::onCallStateChanged(QString stateTxt)//, pjsip_inv_state state)
+void CallLogEntry::onCallStateChanged(QString stateTxt, int state)
 {
-    // TODO if pjsip_inv_state state is PJSIP_INV_STATE_DISCONNECTED then delete call_;
     // TODO also delete call object in SipConference
 
     state_ = stateTxt;
     emit entryChanged(row_, { Qt::UserRole+2 });
+
+    if(state == PJSIP_INV_STATE_DISCONNECTED) {
+        delete call_;
+    }
 }
 
 } // namespace qsua
