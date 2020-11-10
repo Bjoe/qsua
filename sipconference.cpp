@@ -12,9 +12,9 @@ SipConference::SipConference()
 
 }
 
-void SipConference::addCall(SipCall *call)
+void SipConference::addCall(int callId)
 {
-    calls_.push_back(call);
+    calls_.push_back(callId);
 }
 
 void SipConference::start()
@@ -24,8 +24,8 @@ void SipConference::start()
         return;
     }
 
-    SipCall* call1 = calls_.at(0);
-    SipCall* call2 = calls_.at(1);
+    pj::Call* call1 = pj::Call::lookup(calls_.at(0));
+    pj::Call* call2 = pj::Call::lookup(calls_.at(1));
 
     if(     !call1->isActive() ||
             !call1->hasMedia() ||
@@ -49,9 +49,9 @@ void SipConference::start()
     audioMedia2.startTransmit(audioMedia1);
 }
 
-void SipConference::removeCall(SipCall *call)
+void SipConference::removeCall(int callId)
 {
-    auto result = std::find(std::begin(calls_), std::end(calls_), call);
+    auto result = std::find(std::begin(calls_), std::end(calls_), callId);
     if(result != std::end(calls_)) {
         calls_.erase(result);
     }

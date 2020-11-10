@@ -12,13 +12,13 @@ class SipConference
 public:
     SipConference();
 
-    void addCall(SipCall* call);
+    void addCall(int callId);
     void start();
 
-    void removeCall(SipCall* call);
+    void removeCall(int callId);
 
 public:
-    std::vector<SipCall*> calls_{};
+    std::vector<int> calls_{};
 };
 
 } // namespace qsua
