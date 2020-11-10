@@ -26,6 +26,9 @@ QString CallLogEntry::state() const
 
 void CallLogEntry::onCallStateChanged(QString stateTxt)//, pjsip_inv_state state)
 {
+    // TODO if pjsip_inv_state state is PJSIP_INV_STATE_DISCONNECTED then delete call_;
+    // TODO also delete call object in SipConference
+
     state_ = stateTxt;
     emit entryChanged(row_, { Qt::UserRole+2 });
 }
