@@ -14,9 +14,6 @@ class SipCall : public QObject, public pj::Call
     Q_OBJECT
 
 public:
-    SipCall &operator=(const SipCall&) = default;
-
-
     SipCall(SipAccount* account, int callId = PJSUA_INVALID_ID);
 
     std::string remoteUri() const;
