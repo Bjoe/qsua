@@ -74,6 +74,12 @@ void PjSuaContext::onMakeCall(const QString& uri)
 
     model_->addCall(call);
     qDebug() << "Make call" << uri << "started";
+
+    if(conference_ == nullptr) {
+        conference_ = new SipConference(call);
+    } else {
+        conference_->addCall(call);
+    }
 }
 
 CallListModel* PjSuaContext::model() const
@@ -84,6 +90,19 @@ CallListModel* PjSuaContext::model() const
 void PjSuaContext::onIncomingCall(SipCall *call)
 {
     model_->addCall(call);
+
+    if(conference_ == nullptr) {
+        conference_ = new SipConference(call);
+    } else {
+        conference_->addCall(call);
+    }
+}
+
+void PjSuaContext::onConference()
+{
+    if(conference_) {
+        conference_->start();
+    }
 }
 
 

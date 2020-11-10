@@ -2,6 +2,7 @@
 #define QSUA_PJSUACONTEXT_H
 
 #include "calllistmodel.h"
+#include "sipconference.h"
 #include "pjsuacore.h"
 
 #include <QString>
@@ -26,6 +27,7 @@ public slots:
     void onCreateAccount();
     void onMakeCall(const QString &uri);
     void onIncomingCall(SipCall* call);
+    void onConference();
 
 signals:
     void modelChanged();
@@ -35,6 +37,7 @@ private:
     PjSuaCore core_{};
     SipAccount *account_{};
     CallListModel *model_{new CallListModel(this)};
+    SipConference *conference_{};
 };
 
 } // namespace qsua

@@ -71,6 +71,8 @@ target_sources(Qsua
     siplogwriter.cpp
     calllogentry.h
     calllogentry.cpp
+    sipconference.h
+    sipconference.cpp
     )
 
 target_compile_definitions(Qsua

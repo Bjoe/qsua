@@ -24,6 +24,11 @@
         <source>Make call</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="HomeForm.ui.qml" line="64"/>
+        <source>Confer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Page1Form.ui</name>

@@ -59,6 +59,13 @@ Page {
                     pjSuaDestUri.clear()
                 }
             }
+            Button {
+                id: confButton
+                text: qsTr("Confer")
+                onClicked: {
+                    pjSuaCtx.onConference()
+                }
+            }
         }
     }
     states: [
