@@ -3,6 +3,12 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
 
 Page {
+    property alias pjSuaDestUri: pjSuaDestUri
+    property alias clearButton: clearButton
+    property alias callButton: callButton
+    property alias confButton: confButton
+    property alias listView: listView
+
     title: qsTr("Calllog")
 
     ColumnLayout {
@@ -23,13 +29,6 @@ Page {
             clip: true
 
             model: pjSuaCtx.model
-
-            delegate: SipCallDelegate {
-                onClicked: {
-                    console.log("SipCallDelegate clicked " + remoteUri)
-                    pjSuaDestUri.text = remoteUri
-                }
-            }
         }
 
         RowLayout {
@@ -46,25 +45,15 @@ Page {
             Button {
                 id: clearButton
                 text: qsTr("Clear")
-                onClicked: {
-                    pjSuaDestUri.clear()
-                }
             }
 
             Button {
                 id: callButton
                 text: qsTr("Make call")
-                onClicked: {
-                    pjSuaCtx.onMakeCall(pjSuaDestUri.text)
-                    pjSuaDestUri.clear()
-                }
             }
             Button {
                 id: confButton
                 text: qsTr("Confer")
-                onClicked: {
-                    pjSuaCtx.onConference()
-                }
             }
         }
     }
@@ -91,3 +80,10 @@ Page {
         }
     ]
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/
+

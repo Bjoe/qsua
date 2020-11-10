@@ -62,7 +62,7 @@ ApplicationWindow {
                 text: qsTr("Account configuration")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page1Form.ui.qml")
+                    stackView.push("Page1.qml")
                     drawer.close()
                 }
             }
@@ -93,7 +93,7 @@ ApplicationWindow {
 
     StackView {
         id: stackView
-        initialItem: "HomeForm.ui.qml"
+        initialItem: "Home.qml"
         anchors.fill: parent
     }
 

@@ -4,28 +4,28 @@
 <context>
     <name>HomeForm.ui</name>
     <message>
-        <location filename="HomeForm.ui.qml" line="6"/>
+        <location filename="HomeForm.ui.qml" line="12"/>
         <source>Calllog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HomeForm.ui.qml" line="43"/>
+        <location filename="HomeForm.ui.qml" line="42"/>
         <source>sip:0123456478@foo.bar</source>
         <oldsource>sip:0123456478@sipgate.de</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HomeForm.ui.qml" line="48"/>
+        <location filename="HomeForm.ui.qml" line="47"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HomeForm.ui.qml" line="56"/>
+        <location filename="HomeForm.ui.qml" line="52"/>
         <source>Make call</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HomeForm.ui.qml" line="64"/>
+        <location filename="HomeForm.ui.qml" line="56"/>
         <source>Confer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -33,13 +33,13 @@
 <context>
     <name>Page1Form.ui</name>
     <message>
-        <location filename="Page1Form.ui.qml" line="8"/>
-        <location filename="Page1Form.ui.qml" line="25"/>
+        <location filename="Page1Form.ui.qml" line="24"/>
+        <location filename="Page1Form.ui.qml" line="41"/>
         <source>Account configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="33"/>
+        <location filename="Page1Form.ui.qml" line="49"/>
         <source>The full SIP URL for the account</source>
         <translation type="unfinished"></translation>
     </message>
@@ -49,37 +49,37 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="48"/>
+        <location filename="Page1Form.ui.qml" line="64"/>
         <source>URL to be put in the request URI for the registration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="69"/>
+        <location filename="Page1Form.ui.qml" line="85"/>
         <source>Account credentials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="77"/>
+        <location filename="Page1Form.ui.qml" line="93"/>
         <source>Credential Scheme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="92"/>
+        <location filename="Page1Form.ui.qml" line="108"/>
         <source>Realm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="107"/>
+        <location filename="Page1Form.ui.qml" line="123"/>
         <source>User name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="122"/>
+        <location filename="Page1Form.ui.qml" line="138"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="128"/>
+        <location filename="Page1Form.ui.qml" line="144"/>
         <source>password</source>
         <translation type="unfinished"></translation>
     </message>

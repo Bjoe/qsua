@@ -5,6 +5,22 @@ import Qt.labs.settings 1.1
 
 Page {
     id: pageRoot
+    property alias pjsuaAccConfigId: pjsuaAccConfigId
+    property alias pjsuaAccConfigRegUri: pjsuaAccConfigRegUri
+    property alias pjsipCredInfoScheme: pjsipCredInfoScheme
+    property alias pjsipCredInfoRealm: pjsipCredInfoRealm
+    property alias pjsipCredInfoUsername: pjsipCredInfoUsername
+    property alias pjsipCredInfoData: pjsipCredInfoData
+
+    Settings {
+        property alias pjsuaAccConfigId: pjsuaAccConfigId.text
+        property alias pjsuaAccConfigRegUri: pjsuaAccConfigRegUri.text
+        property alias pjsipCredInfoScheme: pjsipCredInfoScheme.text
+        property alias pjsipCredInfoRealm: pjsipCredInfoRealm.text
+        property alias pjsipCredInfoUsername: pjsipCredInfoUsername.text
+        property alias pjsipCredInfoData: pjsipCredInfoData.text
+    }
+
     title: qsTr("Account configuration")
     ScrollView {
         anchors.fill: parent
@@ -130,19 +146,6 @@ Page {
                 }
             }
         }
-    }
-
-    Settings {
-        property alias pjsuaAccConfigId: pjsuaAccConfigId.text
-        property alias pjsuaAccConfigRegUri: pjsuaAccConfigRegUri.text
-        property alias pjsipCredInfoScheme: pjsipCredInfoScheme.text
-        property alias pjsipCredInfoRealm: pjsipCredInfoRealm.text
-        property alias pjsipCredInfoUsername: pjsipCredInfoUsername.text
-        property alias pjsipCredInfoData: pjsipCredInfoData.text
-    }
-
-    Component.onDestruction: {
-        pjSuaCtx.onCreateAccount()
     }
 }
 
