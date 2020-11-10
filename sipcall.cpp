@@ -14,14 +14,14 @@ SipCall::SipCall(SipAccount *account, int callId) : QObject(account), pj::Call(*
 
 std::string SipCall::remoteUri() const
 {
-    pj::CallInfo ci = Call::getInfo();
+    pj::CallInfo ci = pj::Call::getInfo();
     std::string o = ci.remoteUri;
     return o;
 }
 
 std::string SipCall::stateText() const
 {
-    pj::CallInfo ci = Call::getInfo();
+    pj::CallInfo ci = pj::Call::getInfo();
     std::string state = ci.stateText;
     return state;
 }
@@ -30,25 +30,25 @@ void SipCall::accept()
 {
     pj::CallOpParam prm;
     prm.statusCode = static_cast<pjsip_status_code>(200);
-    Call::answer(prm);
+    pj::Call::answer(prm);
 }
 
 void SipCall::decline()
 {
     pj::CallOpParam prm;
     prm.statusCode = static_cast<pjsip_status_code>(603);
-    Call::answer(prm);
+    pj::Call::answer(prm);
 }
 
 void SipCall::hangup()
 {
     pj::CallOpParam prm;
-    Call::hangup(prm);
+    pj::Call::hangup(prm);
 }
 
 void SipCall::onCallState([[maybe_unused]] pj::OnCallStateParam &prm)
 {
-    pj::CallInfo ci = Call::getInfo();
+    pj::CallInfo ci = pj::Call::getInfo();
     QString stateTxt{ci.stateText.c_str()};
     qDebug() << "*** Call: " <<  ci.remoteUri.c_str() << " [" << stateTxt << "]";
 
@@ -60,7 +60,7 @@ void SipCall::onCallMediaState([[maybe_unused]] pj::OnCallMediaStateParam &prm)
     pj::AudioMedia audioMedia{};
     try {
         // Get the first audio media
-        audioMedia = Call::getAudioMedia(-1);
+        audioMedia = pj::Call::getAudioMedia(-1);
     }  catch (...) {
         qWarning() << "onCallMediaState() Call::getAudioMedia failed!";
         return;
