@@ -28,6 +28,7 @@ public:
 
 signals:
     void stateChanged(QString stateTxt, int state);
+    void disconnected(int callId);
 
     // Call interface
 protected:

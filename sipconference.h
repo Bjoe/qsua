@@ -3,18 +3,21 @@
 
 #include "sipcall.h"
 
+#include <QObject>
 #include <vector>
 
 namespace qsua {
 
-class SipConference
+class SipConference : public QObject
 {
+    Q_OBJECT
 public:
-    SipConference();
+    SipConference(QObject* parent = nullptr);
 
     void addCall(int callId);
     void start();
 
+public slots:
     void removeCall(int callId);
 
 public:

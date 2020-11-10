@@ -26,8 +26,6 @@ QString CallLogEntry::state() const
 
 void CallLogEntry::onCallStateChanged(QString stateTxt, int state)
 {
-    // TODO also delete call object in SipConference
-
     state_ = stateTxt;
     emit entryChanged(row_, { Qt::UserRole+2 });
 

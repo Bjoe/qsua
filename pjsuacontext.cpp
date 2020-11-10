@@ -76,6 +76,7 @@ void PjSuaContext::onMakeCall(const QString& uri)
     qDebug() << "Make call" << uri << "started";
 
     conference_.addCall(call->getId());
+    connect(call, &SipCall::disconnected, &conference_, &SipConference::removeCall);
 }
 
 CallListModel* PjSuaContext::model() const
@@ -88,6 +89,7 @@ void PjSuaContext::onIncomingCall(SipCall *call)
     model_->addCall(call);
 
     conference_.addCall(call->getId());
+    connect(call, &SipCall::disconnected, &conference_, &SipConference::removeCall);
 }
 
 void PjSuaContext::onConference()

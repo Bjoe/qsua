@@ -7,7 +7,7 @@
 
 namespace qsua {
 
-SipConference::SipConference()
+SipConference::SipConference(QObject *parent) : QObject(parent)
 {
 
 }
@@ -48,6 +48,7 @@ void SipConference::start()
     audioMedia1.startTransmit(audioMedia2);
     audioMedia2.startTransmit(audioMedia1);
 }
+
 
 void SipConference::removeCall(int callId)
 {

@@ -53,6 +53,11 @@ void SipCall::onCallState([[maybe_unused]] pj::OnCallStateParam &prm)
     qDebug() << "*** Call: " <<  ci.remoteUri.c_str() << " [" << stateTxt << "]";
 
     emit stateChanged(stateTxt, ci.state);
+
+    if(ci.state == PJSIP_INV_STATE_DISCONNECTED) {
+        int callId = pj::Call::getId();
+        emit disconnected(callId);
+    }
 }
 
 void SipCall::onCallMediaState([[maybe_unused]] pj::OnCallMediaStateParam &prm)
