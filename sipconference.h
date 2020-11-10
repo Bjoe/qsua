@@ -3,21 +3,22 @@
 
 #include "sipcall.h"
 
+#include <vector>
+
 namespace qsua {
 
 class SipConference
 {
 public:
-    SipConference(SipCall* call);
+    SipConference();
 
     void addCall(SipCall* call);
     void start();
 
-    bool removeCall(SipCall* call);
+    void removeCall(SipCall* call);
 
 public:
-    SipCall* call1_;
-    SipCall* call2_;
+    std::vector<SipCall*> calls_{};
 };
 
 } // namespace qsua

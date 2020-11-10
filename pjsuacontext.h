@@ -37,7 +37,7 @@ private:
     PjSuaCore core_{};
     SipAccount *account_{};
     CallListModel *model_{new CallListModel(this)};
-    SipConference *conference_{};
+    SipConference conference_{};
 };
 
 } // namespace qsua
