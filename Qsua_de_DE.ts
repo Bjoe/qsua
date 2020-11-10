@@ -9,24 +9,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HomeForm.ui.qml" line="42"/>
+        <location filename="HomeForm.ui.qml" line="43"/>
         <source>sip:0123456478@foo.bar</source>
         <oldsource>sip:0123456478@sipgate.de</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="HomeForm.ui.qml" line="47"/>
-        <source>Clear</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="HomeForm.ui.qml" line="52"/>
-        <source>Make call</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="HomeForm.ui.qml" line="56"/>
-        <source>Confer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -94,24 +79,6 @@
     <message>
         <location filename="Page2Form.ui.qml" line="8"/>
         <source>You are on Page 2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SipCallDelegate</name>
-    <message>
-        <location filename="SipCallDelegate.qml" line="37"/>
-        <source>Accept</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="SipCallDelegate.qml" line="45"/>
-        <source>Decline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="SipCallDelegate.qml" line="53"/>
-        <source>Hangup</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

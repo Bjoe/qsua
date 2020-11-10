@@ -4,55 +4,66 @@ import QtQuick.Layouts 1.11
 
 Item {
     id: rootDelegate
-    height: hangupButton.implicitHeight
+    height: rootLayout.implicitHeight + 20
     width: listView.width
 
     signal clicked(string remoteUri)
 
-    RowLayout {
-        anchors.fill: rootDelegate
+    ColumnLayout {
+        id: rootLayout
+        anchors.fill: parent
+
         Text {
             Layout.fillWidth: true
 
             id: uriTxt
             text: model.display
-            font.bold: true
 
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    console.log("Click on " + model.display)
                     rootDelegate.clicked(model.display)
                 }
             }
         }
-        Text {
-            id: txtState
-            text: model.state
-            font.bold: true
-        }
-        Button {
-            id: acceptButton
-            visible: false
-            text: qsTr("Accept")
-            onClicked: {
-                model.callObj.accept();
+        RowLayout {
+            Text {
+                Layout.fillWidth: true
+                id: txtState
+                text: model.state
             }
-        }
-        Button {
-            id: declineButton
-            visible: false
-            text: qsTr("Decline")
-            onClicked: {
-                model.callObj.decline();
+            Image {
+                id: acceptButton
+                visible: false
+                source: "assets/call_start.png"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        model.callObj.accept();
+                    }
+                }
             }
-        }
-        Button {
-            id: hangupButton
-            visible: false
-            text: qsTr("Hangup")
-            onClicked: {
-                model.callObj.hangup();
+            Image {
+                id: declineButton
+                visible: false
+                source: "assets/call_stop.png"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        model.callObj.decline();
+                    }
+                }
+            }
+            Image {
+                id: hangupButton
+                visible: false
+                source: "assets/call_stop.png"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        model.callObj.hangup();
+                    }
+                }
             }
         }
     }
