@@ -14,7 +14,6 @@ PjSuaContext::PjSuaContext(QObject *parent) : QObject(parent)
 {
     core_.onPjsuaStart();
     onCreateAccount();
-    emit modelChanged();
 }
 
 void PjSuaContext::onCreateAccount()

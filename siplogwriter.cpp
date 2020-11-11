@@ -14,7 +14,7 @@ void SipLogWriter::write(const pj::LogEntry &entry)
     switch(entry.level)
     {
     case 0:
-        qFatal("%s %d %s", entry.threadName.c_str(), entry.threadId, entry.msg.c_str());
+        qFatal("%s %u %s", entry.threadName.c_str(), static_cast<unsigned int>(entry.threadId), entry.msg.c_str());
         break;
     case 1:
         qCritical() << entry.threadName.c_str() << entry.threadId << entry.msg.c_str();

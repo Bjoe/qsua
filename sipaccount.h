@@ -21,7 +21,7 @@ public:
     void onIncomingCall(pj::OnIncomingCallParam &prm) override;
 
 signals:
-    void incomingCall(SipCall* call);
+    void incomingCall(qsua::SipCall* call);
     void regStateChanged(bool regIsActive, QString statusTxt);
 };
 

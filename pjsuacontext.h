@@ -26,7 +26,7 @@ public:
 public slots:
     void onCreateAccount();
     void onMakeCall(const QString &uri);
-    void onIncomingCall(SipCall* call);
+    void onIncomingCall(qsua::SipCall *call);
     void onConference();
 
 signals:

@@ -64,7 +64,7 @@ void PjSuaCore::onPjsuaStart()
     qDebug() << "Got" << dev_count << "audio devices";
     for (pjmedia_aud_dev_index dev_idx=0; dev_idx < dev_count; ++dev_idx) {
         pjmedia_aud_dev_info info;
-        pj_status_t status = pjmedia_aud_dev_get_info(dev_idx, &info);
+        pjmedia_aud_dev_get_info(dev_idx, &info);
         qDebug() << dev_idx << ". " << info.name << "(in=" << info.input_count << "out=" << info.output_count << ")";
     }
 
