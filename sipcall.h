@@ -19,9 +19,9 @@ public:
     std::string remoteUri() const;
     std::string stateText() const;
 
-    Q_INVOKABLE void accept();
-    Q_INVOKABLE void decline();
-    Q_INVOKABLE void hangup();
+    Q_INVOKABLE void accept(); // TODO use callid and do not use ui thread
+    Q_INVOKABLE void decline(); // TODO use callid and do not use ui thread
+    Q_INVOKABLE void hangup(); // TODO use callid and do not use ui thread
 
 signals:
     void stateChanged(QString stateTxt, int state);

@@ -1,14 +1,15 @@
 #include "pjsuacore.h"
 
-#include <QDebug>
-
+#include "sipcall.h"
 #include "siplogwriter.h"
+
+#include <QDebug>
+#include <QSettings>
 
 namespace qsua {
 
 PjSuaCore::PjSuaCore(QObject *parent) : QObject(parent)
 {
-
 }
 
 void PjSuaCore::onHangupAllCalls()
@@ -84,7 +85,119 @@ void PjSuaCore::onPjsuaStart()
     amanager.setPlaybackDev(0);*/
 }
 
+void PjSuaCore::onCreateAccount()
+{
+    if(createAccountThread_) {
+        if(createAccountThread_->isRunning()) {
+            return;
+        } else {
+            delete createAccountThread_;
+            free(pjCreateCreateAccountThreadDesc_);
+        }
+    }
+    createAccountThread_ = QThread::create(&PjSuaCore::createAccountWorker, this);
+    createAccountThread_->start();
+}
 
+void PjSuaCore::onMakeCall(const QString &uri)
+{
+    if(callThread_) {
+        if(callThread_->isRunning()) {
+            return;
+        } else {
+            delete callThread_;
+            free(pjCallThreadDesc_);
+        }
+    }
+    callThread_ = QThread::create(&PjSuaCore::makeCallWorker, this, uri);
+    callThread_->start();
+}
+
+void PjSuaCore::makeCallWorker(const QString &uri)
+{
+    // Make outgoing call
+    SipCall *call = new SipCall(account_);
+
+    pj::CallOpParam prm(true);
+    prm.opt.audioCount = 1;
+    prm.opt.videoCount = 0;
+    try {
+        qDebug() << "Make call" << uri;
+        pjCallThreadDesc_ = (pj_thread_desc*)malloc(sizeof(pj_thread_desc));
+        if (!pjCallThreadDesc_) {
+            qWarning() << "Settings are empty!";
+            return;
+        }
+        pj_bzero(pjCallThreadDesc_, sizeof(pj_thread_desc));
+        pj_status_t st = pj_thread_register("makeCallWorkerQThread",
+                                            *pjCallThreadDesc_,
+                                            &pjCallThread_);
+        if(st != PJ_SUCCESS) {
+            qWarning() << "Cannot register thread for PjSip statck";
+            return;
+        }
+
+        call->makeCall(uri.toStdString(), prm);
+    }  catch (pj::Error& e) {
+        qWarning() << "Make call failed: " << e.reason.c_str() << " src File: " << e.srcFile.c_str() << " : " << e.srcLine << " (" << e.status << ") " << e.title.c_str();
+    }
+    emit newCall(call);
+}
+
+void PjSuaCore::createAccountWorker()
+{
+    QSettings settings;
+    std::string pjsuaAccConfigId = settings.value("pjsuaAccConfigId").toString().toStdString();
+    std::string pjsuaAccConfigRegUri = settings.value("pjsuaAccConfigRegUri").toString().toStdString();
+    std::string pjsipCredInfoScheme = settings.value("pjsipCredInfoScheme").toString().toStdString();
+    std::string pjsipCredInfoRealm = settings.value("pjsipCredInfoRealm").toString().toStdString();
+    std::string pjsipCredInfoUsername = settings.value("pjsipCredInfoUsername").toString().toStdString();
+    std::string pjsipCredInfoData = settings.value("pjsipCredInfoData").toString().toStdString();
+
+    if(pjsuaAccConfigId.empty() &&
+               pjsuaAccConfigRegUri.empty() &&
+               pjsipCredInfoScheme.empty() &&
+               pjsipCredInfoRealm.empty() &&
+               pjsipCredInfoUsername.empty() &&
+               pjsipCredInfoData.empty())
+    {
+        qWarning() << "Settings are empty!";
+        return;
+    }
+
+    pjCreateCreateAccountThreadDesc_ = (pj_thread_desc*)malloc(sizeof(pj_thread_desc));
+    if (!pjCreateCreateAccountThreadDesc_) {
+        qWarning() << "Settings are empty!";
+        return;
+    }
+    pj_bzero(pjCreateCreateAccountThreadDesc_, sizeof(pj_thread_desc));
+    pj_status_t st = pj_thread_register("createAccountWorkerQThread",
+                                        *pjCreateCreateAccountThreadDesc_,
+                                        &pjCreateAccountThread_);
+    if(st != PJ_SUCCESS) {
+        qWarning() << "Cannot register thread for PjSip statck";
+        return;
+    }
+
+    if(account_) {
+        delete account_;
+    }
+
+    pj::AccountConfig accountConfig{};
+    accountConfig.idUri = pjsuaAccConfigId;
+    accountConfig.regConfig.registrarUri = pjsuaAccConfigRegUri;
+
+    pj::AuthCredInfo authCredentials(pjsipCredInfoScheme, pjsipCredInfoRealm, pjsipCredInfoUsername, 0, pjsipCredInfoData);
+
+    accountConfig.sipConfig.authCreds.push_back(authCredentials);
+
+    account_ = new SipAccount();
+    connect(account_, &SipAccount::regStateChanged, this, &PjSuaCore::regStateChanged);
+    connect(account_, &SipAccount::incomingCall, this, &PjSuaCore::incomingCall);
+
+    account_->create(accountConfig);
+    qDebug() << "Account created!";
+}
 
 void PjSuaCore::onPjsuaDestroy()
 {

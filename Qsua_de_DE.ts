@@ -11,7 +11,6 @@
     <message>
         <location filename="HomeForm.ui.qml" line="43"/>
         <source>sip:0123456478@foo.bar</source>
-        <oldsource>sip:0123456478@sipgate.de</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -29,7 +28,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Page1Form.ui.qml" line="50"/>
+        <location filename="Page1Form.ui.qml" line="56"/>
         <source></source>
         <translation></translation>
     </message>

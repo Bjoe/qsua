@@ -24,18 +24,20 @@ public:
     CallListModel *model() const;
 
 public slots:
-    void onCreateAccount();
     void onMakeCall(const QString &uri);
-    void onIncomingCall(qsua::SipCall *call);
+    void onAddCall(qsua::SipCall *call);
     void onConference();
+    void onCreateAccount();
 
 signals:
+    void start();
+    void makeCall(const QString &uri);
+    void createAccount();
     void modelChanged();
     void regStateChanged(bool regIsActive, QString statusTxt);
 
 private:
     PjSuaCore core_{};
-    SipAccount *account_{};
     CallListModel *model_{new CallListModel(this)};
     SipConference conference_{};
 };

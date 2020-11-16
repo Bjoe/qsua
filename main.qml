@@ -126,4 +126,9 @@ ApplicationWindow {
             }
         }
     }*/
+
+    Component.onCompleted: {
+        pjSuaCtx.start();
+        pjSuaCtx.onCreateAccount();
+    }
 }
