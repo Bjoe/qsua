@@ -24,29 +24,33 @@ void SipConference::start()
         return;
     }
 
-    pj::Call* call1 = pj::Call::lookup(calls_.at(0));
-    pj::Call* call2 = pj::Call::lookup(calls_.at(1));
+    for(std::size_t i = 0; i < calls_.size(); ++i) {
+        pj::Call* call1 = pj::Call::lookup(calls_.at(i));
+        for(std::size_t x = i+1; x < calls_.size(); ++x) {
+            pj::Call* call2 = pj::Call::lookup(calls_.at(x));
 
-    if(     !call1->isActive() ||
-            !call1->hasMedia() ||
-            !call2->isActive() ||
-            !call2->hasMedia()) {
-        qDebug() << "Conference not possible, no two active calls.";
-        return;
+            if(     !call1->isActive() ||
+                    !call1->hasMedia() ||
+                    !call2->isActive() ||
+                    !call2->hasMedia()) {
+                qDebug() << "Conference not possible, no two active calls.";
+                return;
+            }
+
+            pj::AudioMedia audioMedia1{};
+            pj::AudioMedia audioMedia2{};
+
+            try {
+                audioMedia1 = call1->getAudioMedia(-1);
+                audioMedia2 = call2->getAudioMedia(-1);
+            }  catch (pj::Error& error) {
+                qWarning() << "Conference error: " << error.reason.c_str() << " " << error.srcFile.c_str() << ":" << error.srcLine << " (" << error.status << ") " << error.title.c_str();
+            }
+
+            audioMedia1.startTransmit(audioMedia2);
+            audioMedia2.startTransmit(audioMedia1);
+        }
     }
-
-    pj::AudioMedia audioMedia1{};
-    pj::AudioMedia audioMedia2{};
-
-    try {
-        audioMedia1 = call1->getAudioMedia(-1);
-        audioMedia2 = call2->getAudioMedia(-1);
-    }  catch (pj::Error& error) {
-        qWarning() << "Conference error: " << error.reason.c_str() << " " << error.srcFile.c_str() << ":" << error.srcLine << " (" << error.status << ") " << error.title.c_str();
-    }
-
-    audioMedia1.startTransmit(audioMedia2);
-    audioMedia2.startTransmit(audioMedia1);
 }
 
 
