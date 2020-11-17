@@ -88,29 +88,21 @@ void PjSuaCore::onPjsuaStart()
 void PjSuaCore::onCreateAccount()
 {
     if(createAccountThread_) {
-        if(createAccountThread_->isRunning()) {
-            return;
-        } else {
-            delete createAccountThread_;
-            free(pjCreateCreateAccountThreadDesc_);
-        }
+       createAccountThread_->join();
+       delete createAccountThread_;
+       free(pjCreateCreateAccountThreadDesc_);
     }
-    createAccountThread_ = QThread::create(&PjSuaCore::createAccountWorker, this);
-    createAccountThread_->start();
+    createAccountThread_ = new std::thread(&PjSuaCore::createAccountWorker, this);
 }
 
 void PjSuaCore::onMakeCall(const QString &uri)
 {
     if(callThread_) {
-        if(callThread_->isRunning()) {
-            return;
-        } else {
-            delete callThread_;
-            free(pjCallThreadDesc_);
-        }
+        callThread_->join();
+        delete callThread_;
+        free(pjCallThreadDesc_);
     }
-    callThread_ = QThread::create(&PjSuaCore::makeCallWorker, this, uri);
-    callThread_->start();
+    callThread_ = new std::thread(&PjSuaCore::makeCallWorker, this, uri);
 }
 
 void PjSuaCore::makeCallWorker(const QString &uri)

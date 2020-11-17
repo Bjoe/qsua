@@ -5,7 +5,7 @@
 
 #include <pjsua2.hpp>
 #include <QObject>
-#include <QThread>
+#include <thread>
 
 namespace qsua {
 
@@ -32,10 +32,10 @@ private:
     void makeCallWorker(const QString& uri);
     void createAccountWorker();
 
-    QThread* callThread_{};
+    std::thread* callThread_{};
     pj_thread_t* pjCallThread_{};
     pj_thread_desc* pjCallThreadDesc_{};
-    QThread* createAccountThread_{};
+    std::thread* createAccountThread_{};
     pj_thread_t* pjCreateAccountThread_{};
     pj_thread_desc* pjCreateCreateAccountThreadDesc_{};
 
